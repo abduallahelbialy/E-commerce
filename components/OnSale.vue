@@ -32,9 +32,9 @@
             },
           }"
         >
-          <swiper-slide v-for="item in productMost" :key="item.id">
+          <swiper-slide v-for="item in Onsale" :key="item.id">
             <div class="d-flex justify-content-between gap-3 mt-5 align-items-stretch">
-              <div class="discount-badge">Disc {{ item.Disc }}</div>
+              <div class="discount-badge"> {{ item.Disc }}</div>
               <div class="card ">
                 <div class="d-flex  justify-content-between">
                   <img :src="item.img" alt="product" loading="lazy" class="img-fluid m-auto" />
@@ -44,7 +44,9 @@
                   <span>Rp {{ item.price }}</span>
                   <div class="d-flex justify-content-between align-items-center mb-3">
                     <span><i class="pi pi-star rank"></i> {{ item.rank }}</span>
-                    <button class="btn w-50">{{ $t("Shop") }}</button>
+                   <nuxt-link :to="`/products/${item.id}`" class="btn w-50">
+                      {{ $t("Shop") }}
+                    </nuxt-link>
                   </div>
                 </div>
               </div>

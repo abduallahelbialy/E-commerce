@@ -11,7 +11,7 @@
             </div>
           </div>
         </div>
-        <Swiper 
+        <Swiper
           :navigation="{
             nextEl: '.swiper-arror-next',
             prevEl: '.swiper-arror-prev',
@@ -32,18 +32,29 @@
             },
           }"
         >
-          <swiper-slide v-for="item in productMost" :key="item.id">
-            <div class="d-flex justify-content-between gap-3 mt-5 align-items-stretch">
-              <div class="card ">
-                <div class="d-flex  justify-content-between">
-                  <img :src="item.img" alt="product" loading="lazy" class="img-fluid m-auto" />
+          <swiper-slide v-for="item in products" :key="item.id">
+            <div
+              class="d-flex justify-content-between gap-3 mt-5 align-items-stretch"
+            >
+              <div class="card">
+                <div class="d-flex justify-content-between">
+                  <img
+                    :src="item.img"
+                    alt="product"
+                    loading="lazy"
+                    class="img-fluid m-auto"
+                  />
                 </div>
                 <div class="text d-flex flex-column">
                   <h2 v-html="item.text"></h2>
                   <span>Rp {{ item.price }}</span>
-                  <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                  >
                     <span><i class="pi pi-star rank"></i> {{ item.rank }}</span>
-                    <button class="btn w-50">{{ $t("Shop") }}</button>
+                    <nuxt-link :to="`/products/${item.id}`" class="btn w-50">
+                      {{ $t("Shop") }}
+                    </nuxt-link>
                   </div>
                 </div>
               </div>
@@ -52,23 +63,19 @@
         </Swiper>
       </div>
     </div>
-      <OnSale/>
-
+    <OnSale />
   </section>
-  
 </template>
 
 <script>
-
-import 'swiper/css';
-import 'swiper/css/navigation';
-import MostData from '~/mixins/MostData';
-import OnSale from './OnSale.vue';
+import "swiper/css";
+import "swiper/css/navigation";
+import MostData from "~/mixins/MostData";
+import OnSale from "./OnSale.vue";
 
 export default {
-  mixins:[MostData],
-  components:{OnSale}
- 
+  mixins: [MostData],
+  components: { OnSale },
 };
 </script>
 
@@ -81,10 +88,10 @@ i {
   cursor: pointer;
   outline: none;
 }
-.card{
- width: 320px;
-  min-height: 450px; 
-  border: 2px solid #F4F4F4;
+.card {
+  width: 320px;
+  min-height: 450px;
+  border: 2px solid #f4f4f4;
   border-radius: 4px;
   transition: border-color 0.3s ease;
   padding: 10px;
@@ -92,17 +99,16 @@ i {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-
+  justify-content: space-between;
 }
-.card:hover{
+.card:hover {
   /* transform: scale(1.05); */
-  border: 5px  solid #ddd;
+  border: 5px solid #ddd;
 }
-.rank{
+.rank {
   color: var(--secondary-color);
 }
-.text h2{
+.text h2 {
   font-size: 18px;
 }
 </style>

@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-        <MostPopular/>
+        <products/>
         <BannerPage/>
       </div>
     </div>
@@ -43,7 +43,9 @@
 
 <script>
 import img from "../assets/images/0d8543ab-7748-4f41-9396-33a93bde4418-removebg-preview_waifu2x_photo_noise1_scale 1.png";
+import products from './products/products.vue';
 export default {
+  components: { products },
   data() {
     return {
       img: img,

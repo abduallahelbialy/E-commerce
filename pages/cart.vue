@@ -4,21 +4,21 @@
 
     <div v-if="cartStore.cart.length > 0">
       <div v-for="(product, index) in cartStore.cart" :key="index" class="cart-item">
-        <img :src="product.image" alt="صورة المنتج" />
+        <img :src="product.img" alt="صورة المنتج" class="cart-img"/>
         <div>
-          <h3>{{ product.name }}</h3>
+          <h3 v-html=" product.text "></h3>
           <p>السعر: {{ product.price }} جنيه</p>
           <button @click="removeItem(index)">إزالة</button>
         </div>
       </div>
     </div>
 
-    <p v-else class=" text-center fs-3">السلة فارغة</p>
+    <p v-else class="text-center fs-3">السلة فارغة</p>
   </div>
 </template>
 
 <script setup>
-import { useCartStore } from "~/stores/cartStore";
+import { useCartStore } from "@/stores/cartStore";
 
 const cartStore = useCartStore();
 
@@ -27,6 +27,23 @@ const removeItem = (index) => {
   cartStore.removeFromCart(index);
 };
 </script>
+
+<style scoped>
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+</style>
+
 
 <style>
 h2 {

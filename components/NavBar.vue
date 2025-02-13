@@ -47,7 +47,7 @@
               <i class="pi pi-globe color-icon"></i>
             </button>
           </div>
-          <div>
+          <div @click="Gochat">
             <i class="pi pi-comments color-icon"></i>
           </div>
           <div class="F-icon"  @click="goToFavorites">
@@ -155,6 +155,9 @@ const Gocreate = () => {
 };
 const goToFavorites = () => {
   router.push("/Favorite");
+};
+const Gochat = () => {
+  router.push("/chat");
 };
 const logout = () => {
   userStore.logout();

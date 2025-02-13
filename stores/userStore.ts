@@ -26,18 +26,18 @@ export const useUserStore = defineStore("user", {
   }),
 
   actions: {
-    // تسجيل مستخدم جديد
+    // registerUser
     registerUser(data: UserData) {
       this.userData = { ...data };
       this.isLoggedIn = true;
 
-      // حفظ بيانات المستخدم في localStorage
+      // sessionStorage
       if (process.client) {
-        localStorage.setItem("userData", JSON.stringify(data));
+        sessionStorage.setItem("userData", JSON.stringify(data));
       }
     },
 
-    // تسجيل الدخول
+    //  loginUser
     loginUser({
       email,
       password,
@@ -45,9 +45,9 @@ export const useUserStore = defineStore("user", {
       email: string;
       password: string;
     }): boolean {
-      // استرجاع بيانات المستخدم من localStorage
+      // sessionStorage
       if (process.client) {
-        const storedUserData = localStorage.getItem("userData");
+        const storedUserData = sessionStorage.getItem("userData");
 
         if (storedUserData) {
           const userData = JSON.parse(storedUserData);
@@ -63,21 +63,21 @@ export const useUserStore = defineStore("user", {
       return false;
     },
 
-    // تسجيل الخروج
+    //  logout
     logout() {
       this.userData = null;
       this.isLoggedIn = false;
 
-      // حذف بيانات المستخدم من localStorage
-      if (process.client) {
-        localStorage.removeItem("userData");
-      }
+      // sessionStorage
+      // if (process.client) {
+      //   sessionStorage.removeItem("userData");
+      // }
     },
 
-    // استعادة حالة المستخدم من localStorage
+    // initializeUser
     initializeUser() {
       if (process.client) {
-        const storedUserData = localStorage.getItem("userData");
+        const storedUserData = sessionStorage.getItem("userData");
 
         if (storedUserData) {
           const userData = JSON.parse(storedUserData);

@@ -337,7 +337,7 @@ const validateForm = () => {
 const handleSubmit = () => {
   if (validateForm()) {
     userStore.registerUser(form.value);
-    router.push("/SignIn"); // توجيه المستخدم إلى صفحة تسجيل الدخول بعد التسجيل
+    router.push("/"); //
   }
 };
 </script>

@@ -129,7 +129,7 @@ const validateForm = () => {
 const handleSubmit = () => {
   if (validateForm()) {
     if (userStore.loginUser({ email: form.value.username, password: form.value.password })) {
-      router.push("/"); // توجيه المستخدم إلى الصفحة الرئيسية بعد تسجيل الدخول
+      router.push("/"); 
     } else {
       alert("Invalid email or password!");
     }

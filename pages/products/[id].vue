@@ -37,7 +37,7 @@
                 </div>
               </div>
               <div>
-                <h2 v-html="product.text"></h2>
+                <h2 class="text-start">{{ product.text }}</h2>
               </div>
               <div class="mb-3">
                 <div class="fs-4 fw-semibold text-secondary"> Rank: {{ product.rank }}</div>
@@ -56,10 +56,10 @@
                   <i class="pi pi-comments details"></i>
                 </div>
                 <div>
-                  <button class="btnTwo w-100" @click="addToCart(product)">+ Add to cart</button>
+                  <button class="btnTwo w-100" @click="handleAddToCart(product)">+ Add to cart</button>
                 </div>
                 <div>
-                  <button class="btn w-100">Buy now</button>
+                  <button class="btn w-100" @click="handleBuyNow">Buy now</button>
                 </div>
               </div>
             </div>
@@ -75,53 +75,110 @@
 
 <script>
 import products from "../../FakeDate/products";
+import Swal from 'sweetalert2';
+import { ref, onMounted, computed } from 'vue'; // 
 import { useCartStore } from "@/stores/cartStore";
 import { useFavStore } from "@/stores/favStore";
+import { useRoute, useRouter } from 'vue-router';
+import { useUserStore } from "@/stores/userStore"; //     
+
 export default {
   setup() {
     const cartStore = useCartStore();
- const favStore = useFavStore();
-    const addToCart = (product) => {
-      cartStore.addToCart(product);
-    };
-     const toggleFavorite = (product) => {
-      const isFavorite = favStore.favorites.some((item) => item.id === product.id);
-      if (isFavorite) {
-        favStore.removeFromFavorites(product.id);
+    const favStore = useFavStore();
+    const route = useRoute();
+    const router = useRouter();
+    const userStore = useUserStore();
+
+    const product = ref(null);
+
+    // 
+    const isLoggedIn = computed(() => userStore.isLoggedIn);
+
+    // "Buy Now"
+    const handleBuyNow = () => {
+      if (isLoggedIn.value) {
+        router.push("/buy");
       } else {
-        favStore.addToFavorites(product);
+        Swal.fire({
+                icon: 'warning',
+         title: 'You must be logged in!',
+text: 'Please log in to continue your purchase.',
+confirmButtonText: 'Log in',
+          showCancelButton: true,
+          cancelButtonText: 'Cancel',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/SignIn");
+          }
+        });
       }
     };
 
+    // handleAddToCart
+    const handleAddToCart = (product) => {
+      cartStore.addToCart(product);
+      Swal.fire({
+        icon: 'success',
+      title: 'Added to cart',
+text: 'The product has been successfully added to your cart!',
+        timer: 3000,
+        showConfirmButton: false,
+      });
+    };
+
+    // toggleFavorite
+    const toggleFavorite = (product) => {
+      const isFavorite = favStore.favorites.some((item) => item.id === product.id);
+      if (isFavorite) {
+        favStore.removeFromFavorites(product.id);
+        Swal.fire({
+          icon: 'warning',
+         title: 'Removed from favourites',
+text: 'The product has been removed from favourites successfully!',
+          timer: 3000,
+          showConfirmButton: false,
+        });
+      } else {
+        favStore.addToFavorites(product);
+        Swal.fire({
+          icon: 'success',
+         title: 'Added to favourites',
+text: 'The product has been added to the favourites list!',
+          timer: 3000,
+          showConfirmButton: false,
+        });
+      }
+    };
+
+    const gochat = () => {
+      router.push("/chat");
+    };
+
+    onMounted(() => {
+      const productId = route.params.id;
+      product.value =
+        products.productMost?.find((item) => item.id == productId) ||
+        products.onSale?.find((item) => item.id == productId);
+    });
+
     return {
       cartStore,
-      addToCart,
       favStore,
-       toggleFavorite,
-    };
-  },
-  data() {
-    return {
-      product: null,
-      nums: [
+      product,
+      handleAddToCart,
+      handleBuyNow,
+      isLoggedIn, 
+      toggleFavorite,
+      gochat,
+      nums: ref([
         { id: 1, number: 25 },
         { id: 2, number: 30 },
         { id: 3, number: 35 },
         { id: 4, number: 40 },
         { id: 5, number: 45 },
-      ],
+      ]),
     };
-  },
-  methods: {
-    gochat() {
-      this.$router.push("/chat");
-    },
-  },
-  created() {
-    const productId = this.$route.params.id;
-    this.product =
-      products.productMost.find((item) => item.id == productId) ||
-      products.onSale.find((item) => item.id == productId);
   },
 };
 </script>

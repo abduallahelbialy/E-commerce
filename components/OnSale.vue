@@ -40,7 +40,7 @@
                   <img :src="item.img" alt="product" loading="lazy" class="img-fluid m-auto" />
                 </div>
                 <div class="text d-flex flex-column">
-                  <h2 v-html="item.text"></h2>
+                  <h2 class="text-start">{{ item.text }}</h2>
                   <span>Rp {{ item.price }}</span>
                   <div class="d-flex justify-content-between align-items-center mb-3">
                     <span><i class="pi pi-star rank"></i> {{ item.rank }}</span>

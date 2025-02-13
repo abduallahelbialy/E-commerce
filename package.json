@@ -17,6 +17,7 @@
     "pinia": "^2.3.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.5",
+    "sweetalert2": "^11.16.0",
     "swiper": "^11.2.2",
     "vue": "latest",
     "vue-i18n": "^11.1.0",

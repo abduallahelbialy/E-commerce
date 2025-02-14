@@ -29,7 +29,7 @@
               <nuxt-link to="/ForgotPassword" class="forgot">Forgot Password ?</nuxt-link>
             </div>
             <div>
-              <nuxt-link to="/CreateAccount" class="text-black text-decoration-none">Don't have an account yet?</nuxt-link>
+              <nuxt-link to="/CreateAccount" class="text-black text-decoration-none cre">Don't have an account yet?</nuxt-link>
             </div>
           </div>
           <span class="text-center d-block mt-3">Or</span>
@@ -216,6 +216,9 @@ label {
   }
   .image-container{
     display: none;
+  }
+  .cre,.forgot{
+    font-size: 14px;
   }
 }
 @media (max-width: 799px)  {

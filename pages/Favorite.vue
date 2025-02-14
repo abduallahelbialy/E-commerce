@@ -7,7 +7,7 @@
     <h2 class=" text-start mb-3">Favorite</h2>
 
     <div v-if="favStore.favorites.length > 0">
-      <div v-for="(product, index) in favStore.favorites" :key="index" class="cart-item d-flex justify-content-between mt-2 flex-wrap">
+      <div v-for="(product, index) in favStore.favorites" :key="index" class="cart-item d-flex justify-content-between border-bottom mt-2 flex-wrap">
         <div
                 class="d-flex justify-content-between align-items-center flex-wrap"
               >
@@ -31,8 +31,8 @@
                
                 <div class="d-flex gap-1 align-items-center flex-wrap">
                   
-                  <button @click="removeItem(product.id)">
-                    <i class="pi pi-trash"></i>
+                  <button @click="removeItem(product.id)" class="bg-danger border-0 rounded-2 py-2 px-2">
+                    <i class="pi pi-trash text-white  "></i>
                   </button>
                 </div>
               </div>

@@ -36,8 +36,8 @@
             }}</nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link to="/Other" class="nav-link">{{
-              $t("Other")
+            <nuxt-link to="/Contact" class="nav-link">{{
+              $t("Contact")
             }}</nuxt-link>
           </li>
         </ul>
@@ -84,7 +84,9 @@
                 class="user-avatar"
               />
               <span class="username"
-                >Hello, {{ userStore.userData?.username }}</span
+                >
+<span class="main">Hello,</span>
+                 {{ userStore.userData?.username }}</span
               >
               <div class="dropdown-content" v-show="hidden">
                 <button @click="logout" class="logout-button">
@@ -179,7 +181,9 @@ const logout = () => {
   font-size: 18px;
   color: var(--main-color);
 }
-
+.main{
+  color: var(--main-color);
+}
 .cart-badgeF {
   position: absolute;
   top: -14px;

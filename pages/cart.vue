@@ -308,6 +308,10 @@ button {
 }
 .box button {
   background-color: var(--main-color);
+    position: absolute;
+  right: 15px;
+  
+  cursor: pointer;
 }
 
 [dir="rtl"].box button {
@@ -327,7 +331,13 @@ button {
 }
 @media (max-width: 477px) {
   .box {
-    width: 305px;
+    width: 267px;
+  }
+  [dir="rtl"].box button{
+    right:15px ;
+  }
+  [dir="ltr"].box button{
+    right:15px ;
   }
   .textt {
     font-size: 15px;

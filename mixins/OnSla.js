@@ -9,6 +9,7 @@ const OnSla = {
     return {
       modules: [Navigation],
       Onsale: Onsale.onSale,
+     
     };
   },
 };

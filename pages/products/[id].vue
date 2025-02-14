@@ -4,15 +4,19 @@
       <div class="row">
         <div class="d-flex justify-content-start mb-3">
           <div class="d-flex gap-2 align-items-center">
-            <nuxt-link to="/" class="start text-decoration-none">Home</nuxt-link>
+            <nuxt-link to="/" class="start text-decoration-none"
+              >Home</nuxt-link
+            >
             <i class="pi pi-angle-right start"></i>
             <span class="details fw-semibold">Product Detail</span>
           </div>
         </div>
         <div v-if="product">
-          <div class="d-flex justify-content-between gap-3 flex-wrap align-items-center">
+          <div
+            class="d-flex justify-content-between gap-3 flex-wrap align-items-center"
+          >
             <div class="flex-grow-1">
-              <div class="border rounded-2">
+              <div class=" rounded-2">
                 <div class="d-flex justify-center">
                   <img
                     :src="product.img"
@@ -29,21 +33,30 @@
                   <p class="discount-badge">{{ product.Disc }}</p>
                 </div>
                 <div class="d-flex gap-2">
-<i
-              class="pi pi-heart fs-2 cursor"
-              :class="{ 'text-danger': favStore.favorites.some(item => item.id === product.id) }"
-              @click="toggleFavorite(product)"
-            ></i>                  <i class="pi pi-share-alt fs-2 cursor"></i>
+                  <i
+                    class="pi pi-heart fs-2 cursor"
+                    :class="{
+                      'text-danger': favStore.favorites.some(
+                        (item) => item.id === product.id
+                      ),
+                    }"
+                    @click="toggleFavorite(product)"
+                  ></i>
+                  <i class="pi pi-share-alt fs-2 cursor"></i>
                 </div>
               </div>
               <div>
                 <h2 class="text-start">{{ product.text }}</h2>
               </div>
               <div class="mb-3">
-                <div class="fs-4 fw-semibold text-secondary"> Rank: {{ product.rank }}</div>
+                <div class="fs-4 fw-semibold text-secondary">
+                  Rank: {{ product.rank }}
+                </div>
               </div>
               <div class="mb-3">
-                <div class="details fs-2 fw-semibold">Rp {{ product.price }}</div>
+                <div class="details fs-2 fw-semibold">
+                  Rp {{ product.price }}
+                </div>
               </div>
               <span>Select a size</span>
               <div class="d-flex gap-2 mt-2 mb-3">
@@ -56,10 +69,17 @@
                   <i class="pi pi-comments details"></i>
                 </div>
                 <div>
-                  <button class="btnTwo w-100" @click="handleAddToCart(product)">+ Add to cart</button>
+                  <button
+                    class="btnTwo w-100"
+                    @click="handleAddToCart(product)"
+                  >
+                    + Add to cart
+                  </button>
                 </div>
                 <div>
-                  <button class="btn w-100" @click="handleBuyNow">Buy now</button>
+                  <button class="btn w-100" @click="handleBuyNow">
+                    Buy now
+                  </button>
                 </div>
               </div>
             </div>
@@ -75,12 +95,12 @@
 
 <script>
 import products from "../../FakeDate/products";
-import Swal from 'sweetalert2';
-import { ref, onMounted, computed } from 'vue'; // 
+import Swal from "sweetalert2";
+import { ref, onMounted, computed } from "vue"; //
 import { useCartStore } from "@/stores/cartStore";
 import { useFavStore } from "@/stores/favStore";
-import { useRoute, useRouter } from 'vue-router';
-import { useUserStore } from "@/stores/userStore"; //     
+import { useRoute, useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore"; //
 
 export default {
   setup() {
@@ -92,7 +112,7 @@ export default {
 
     const product = ref(null);
 
-    // 
+    //
     const isLoggedIn = computed(() => userStore.isLoggedIn);
 
     // "Buy Now"
@@ -101,12 +121,12 @@ export default {
         router.push("/buy");
       } else {
         Swal.fire({
-                icon: 'warning',
-         title: 'You must be logged in!',
-text: 'Please log in to continue your purchase.',
-confirmButtonText: 'Log in',
+          icon: "warning",
+          title: "You must be logged in!",
+          text: "Please log in to continue your purchase.",
+          confirmButtonText: "Log in",
           showCancelButton: true,
-          cancelButtonText: 'Cancel',
+          cancelButtonText: "Cancel",
         }).then((result) => {
           if (result.isConfirmed) {
             router.push("/SignIn");
@@ -119,9 +139,9 @@ confirmButtonText: 'Log in',
     const handleAddToCart = (product) => {
       cartStore.addToCart(product);
       Swal.fire({
-        icon: 'success',
-      title: 'Added to cart',
-text: 'The product has been successfully added to your cart!',
+        icon: "success",
+        title: "Added to cart",
+        text: "The product has been successfully added to your cart!",
         timer: 3000,
         showConfirmButton: false,
       });
@@ -129,22 +149,24 @@ text: 'The product has been successfully added to your cart!',
 
     // toggleFavorite
     const toggleFavorite = (product) => {
-      const isFavorite = favStore.favorites.some((item) => item.id === product.id);
+      const isFavorite = favStore.favorites.some(
+        (item) => item.id === product.id
+      );
       if (isFavorite) {
         favStore.removeFromFavorites(product.id);
         Swal.fire({
-          icon: 'warning',
-         title: 'Removed from favourites',
-text: 'The product has been removed from favourites successfully!',
+          icon: "warning",
+          title: "Removed from favourites",
+          text: "The product has been removed from favourites successfully!",
           timer: 3000,
           showConfirmButton: false,
         });
       } else {
         favStore.addToFavorites(product);
         Swal.fire({
-          icon: 'success',
-         title: 'Added to favourites',
-text: 'The product has been added to the favourites list!',
+          icon: "success",
+          title: "Added to favourites",
+          text: "The product has been added to the favourites list!",
           timer: 3000,
           showConfirmButton: false,
         });
@@ -159,7 +181,10 @@ text: 'The product has been added to the favourites list!',
       const productId = route.params.id;
       product.value =
         products.productMost?.find((item) => item.id == productId) ||
-        products.onSale?.find((item) => item.id == productId);
+        products.onSale?.find((item) => item.id == productId) ||
+        products.sandals?.find((item) => item.id == productId) ||
+        products.Slip?.find((item) => item.id == productId) ||
+        products.Kids?.find((item) => item.id == productId);
     });
 
     return {
@@ -168,7 +193,7 @@ text: 'The product has been added to the favourites list!',
       product,
       handleAddToCart,
       handleBuyNow,
-      isLoggedIn, 
+      isLoggedIn,
       toggleFavorite,
       gochat,
       nums: ref([
@@ -182,7 +207,6 @@ text: 'The product has been added to the favourites list!',
   },
 };
 </script>
-
 
 <style scoped>
 .cursor {
@@ -211,7 +235,7 @@ text: 'The product has been added to the favourites list!',
   padding: 5px;
   cursor: pointer;
 }
-.info:hover{
+.info:hover {
   background-color: var(--main-color);
   color: white;
 }
@@ -225,7 +249,7 @@ text: 'The product has been added to the favourites list!',
   align-items: center;
   cursor: pointer;
 }
-.circal:hover{
-background-color: var(--secondary-color);
+.circal:hover {
+  background-color: var(--secondary-color);
 }
 </style>

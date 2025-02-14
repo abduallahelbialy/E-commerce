@@ -288,6 +288,10 @@ export default {
     padding: 5px 8px;
     
 }
+.chat-input input {
+    
+    width: 13px;
+}
 }
 @media (max-width: 799px) {
   .chat-container {

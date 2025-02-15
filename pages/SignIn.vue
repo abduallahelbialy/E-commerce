@@ -34,7 +34,7 @@
           </div>
           <span class="text-center d-block mt-3">Or</span>
           <div class="d-flex justify-content-between gap-3 mt-3 signOther">
-            <div class="box" v-for="item in Input.box" :key="item.id" @click="signInWithGoogle">
+            <div class="box" v-for="item in Input.box" :key="item.id">
               <div class="d-flex gap-2 align-items-center justify-content-center">
                 <img :src="item.icon" alt="icon" class="img-fluid" />
                 <span>{{ item.title }}</span>
@@ -66,31 +66,10 @@ import icon_google from "../assets/images/devicon_google.png";
 import icon_Face from "../assets/images/logos_facebook.png";
 import icon_tel from "../assets/images/ic_baseline-phone.png";
 import { useUserStore } from "../stores/userStore";
-import { auth, provider, signInWithPopup } from "../composables/firebaseConfig";
-
 const userStore = useUserStore();
 
 const router = useRouter();
-const signInWithGoogle = async () => {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    
-    // Store
-    userStore.setUser({
-      uid: user.uid,
-      name: user.displayName,
-      email: user.email,
-      photo: user.photoURL,
-    });
 
-    alert("Login Successful!");
-    router.push("/"); 
-  } catch (error) {
-    console.error("Google Sign-In Error:", error);
-    alert("Failed to sign in with Google.");
-  }
-}
 
 const Input = {
   GoupInput: [

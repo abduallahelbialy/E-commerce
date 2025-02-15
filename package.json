@@ -14,7 +14,6 @@
     "@pinia/nuxt": "^0.9.0",
     "bootstrap": "^5.3.3",
     "emailjs-com": "^3.2.0",
-    "firebase": "^11.3.1",
     "flatpickr": "^4.6.13",
     "nuxt": "^3.15.4",
     "pinia": "^2.3.1",

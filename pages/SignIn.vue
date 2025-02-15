@@ -51,6 +51,7 @@
                 Fast shipping <br />
                 best for <span class="fw-bold you">you</span>
               </div>
+              
             </div>
           </div>
         </div>

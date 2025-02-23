@@ -13,6 +13,7 @@
                 v-model="form.name"
                 class="form-control bg-light py-3"
                 required
+                name="name"
               />
             </div>
 
@@ -25,6 +26,7 @@
                 v-model="form.email"
                 class="form-control bg-light py-3"
                 required
+                name="email"
               />
             </div>
 
@@ -35,6 +37,7 @@
                 class="form-control bg-light"
                 rows="5"
                 required
+                name="message"
               ></textarea>
             </div>
             <div class="mt-2 mb-3 d-flex align-items-center">
